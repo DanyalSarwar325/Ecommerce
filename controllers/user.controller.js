@@ -18,7 +18,7 @@ field?.trim()=="")){
 }
 //if user already exists
 const existingUser= await User.findOne({
-    $or:[{email}]
+   email
 })
 if(existingUser){
  return res.status(400).json({
@@ -42,11 +42,33 @@ const mailOptions = {
     to: email, // User's email
     subject: "Verify Your Email",
     html: `
-      <h1>Email Verification</h1>
-      <p>Hi ${name},</p>
-      <p>Please use the following code to verify your email:</p>
-      <h2>${verificationToken}</h2>
-      <p>This code will expire in 1 hour.</p>
+      <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Your Email</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+  <div style="background: linear-gradient(to right, #4CAF50, #45a049); padding: 20px; text-align: center;">
+    <h1 style="color: white; margin: 0;">Verify Your Email</h1>
+  </div>
+  <div style="background-color: #f9f9f9; padding: 20px; border-radius: 0 0 5px 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+    <p>Hello,</p>
+    <p>Thank you for signing up! Your verification code is:</p>
+    <div style="text-align: center; margin: 30px 0;">
+      <span style="font-size: 32px; font-weight: bold; letter-spacing: 5px; color: #4CAF50;">${verificationToken}</span>
+    </div>
+    <p>Enter this code on the verification page to complete your registration.</p>
+    <p>This code will expire in 15 minutes for security reasons.</p>
+    <p>If you didn't create an account with us, please ignore this email.</p>
+    <p>Best regards,<br>StylesSphere</p>
+  </div>
+  <div style="text-align: center; margin-top: 20px; color: #888; font-size: 0.8em;">
+    <p>This is an automated message, please do not reply to this email.</p>
+  </div>
+</body>
+</html>
     `,
   };
 
@@ -55,7 +77,6 @@ const mailOptions = {
 const createdUser= await User.findById(user._id).select("-password")
 if(!createdUser){
     return res.status(400).json(new ApiResponse(400,{},"User not exist "))
-    
 }
 
 const userResponse = {
@@ -64,14 +85,9 @@ const userResponse = {
     email: createdUser.email,
     verificationToken: createdUser.verificationToken,
     addressess: createdUser.addresses,
-
-    
-
-   
   };
 return res.status(200).json(
     new ApiResponse(200,userResponse,"User Created Sucessfully")
-
 )
 }
 
