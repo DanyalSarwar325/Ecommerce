@@ -8,7 +8,7 @@ dotenv.config();
 
 import {connectDB} from "./config/db.js";
 app.use(cors({
-  origin: 'http://localhost:5173', // Replace with your frontend's origin
+  origin: 'https://frontend-shopping-1mc5.vercel.app/', // Replace with your frontend's origin
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
   credentials: true // If you use cookies or HTTP authentication
 }));
