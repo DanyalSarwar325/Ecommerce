@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 // import UpdatedProducts from './UpdateProducts.js';
 // // import Products from './products.js';
 import { UpdatedProducts } from './shamir.products.js';
-const MONGO_URI="mongodb+srv://danyal:dasaramongo@cluster0.p70jt.mongodb.net/"
+const MONGO_URI="mongodb+srv://danyal:123@shoppingwebsite.jxzzl.mongodb.net/"
 
 const productSchema = new mongoose.Schema({
 

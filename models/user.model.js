@@ -23,10 +23,10 @@ const UserSchema = new mongoose.Schema({
   refreshToken:{
     type:String
   },
-  isVerified:{
-    type:Boolean,
-    default:false
-  },
+  // isVerified:{
+  //   type:Boolean,
+  //   default:false
+  // },
   role:{
     type:String,
  enum:["Admin","User"],
@@ -42,7 +42,7 @@ const UserSchema = new mongoose.Schema({
       phone: { type: Number, },
     },
   ],
-  verificationToken:String,
+ 
 
 });
 
